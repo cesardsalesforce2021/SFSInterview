@@ -1,0 +1,104 @@
+<aura:component
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId"
+    access="global" controller="SkeduloInterview_Ctrl">
+
+	<aura:attribute name="isOpen" type="boolean" default="false" />
+    <aura:attribute name="recordId" type="String" default="" />
+    <aura:attribute name="lstData" type="Object" />
+    <aura:attribute name="Columns" type="List" />
+    <aura:attribute name="TotalRowCount" type="String" default="" />
+    <aura:attribute name="CheckRowCount" type="String" default="0" />
+    <aura:attribute name="totalBalance" type="currency" default="0" />
+    
+    
+    <aura:attribute name="Action" type="List" default="['Action 1', 'Action 2', 'Action 3']"/>
+    <aura:attribute name="Status" type="List" default="['To Do', 'Done']"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <lightning:card>
+        <lightning:layoutItem size="12">
+            <lightning:datatable data="{! v.lstData }" columns="{!v.Columns}" keyField="id" hideCheckboxColumn="true"
+                onrowselection="{! c.onrowselection }" onrowaction="{! c.handleRowAction }" />
+
+        </lightning:layoutItem>
+        <br></br>
+
+
+
+
+        <lightning:button variant="brand" label="Add New Record" title="Add New Record"
+        onclick="{! c.OpenModal }" />
+
+    </lightning:card>
+
+    <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->
+    <aura:if isTrue="{!v.isOpen}">
+
+        <!--###### MODAL BOX Start######-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.CloseModal }" alternativeText="close"
+                        variant="bare-inverse" class="slds-modal__close" />
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Record
+                    </h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                    <div id="myDiv">
+
+                        <table border="0px solid black" bordercolorlight="#a9d4d9" bordercolordark="#a9d4d9"
+                            width="1000px">
+                            <tr>
+                                <td>
+                                    <lightning:card footer="" title="">
+
+                            
+                            <tr>
+                                <td>
+
+                                    <div class="width">
+                                        <lightning:select name="select" label="Action" required="false">
+                                            <aura:iteration items="{!v.Action}" var="varA">
+                                                    <option text="{!varA}"></option>
+                                                </aura:iteration>
+                                        </lightning:select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <div class="width">
+                                        <lightning:select name="select" label="Action" required="false">
+                                            <aura:iteration items="{!v.Status}" var="varS">
+                                                    <option text="{!varS}"></option>
+                                                </aura:iteration>
+                                        </lightning:select>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </lightning:card>
+                            </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.CloseModal }" />
+                    <lightning:button variant="brand" label="Save" title="Save" onclick="{! c.CloseModal }" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!--###### MODAL BOX Part END Here ######-->
+
+    </aura:if>
+
+
+</aura:component>
