@@ -50,7 +50,9 @@
 	},
 	OpenModal1: function (cmp,row)
     {
-		cmp.set("v.isOpen", true);
+		
+		//Add Comments
+		cmp.set("v.isOpen", true);  
 	},
 	deleteRecord: function (cmp)
     {
