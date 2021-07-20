@@ -1,0 +1,49 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+access="global"  controller="SFSInterview">
+
+
+<aura:attribute name="recordId" type="String" default="" />
+<aura:attribute name="lstData" type="Object" />
+<aura:attribute name="Columns" type="List"/>
+<aura:attribute name="TotalRowCount" type="String" default="" />
+<aura:attribute name="CheckRowCount" type="String" default="0" />
+<aura:attribute name="totalBalance" type="currency" default="0" />
+
+<aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+<lightning:card>
+                        <lightning:layoutItem size="12">
+                                <lightning:datatable data="{! v.lstData }"
+                                                     columns="{!v.Columns}"
+                                                     keyField="id"
+                                                     hideCheckboxColumn="false"
+                                                     onrowselection="{! c.onrowselection }"
+                                                     onrowaction="{! c.handleRowAction }"/>
+                           
+                        </lightning:layoutItem>
+                        <br></br>
+                        <lightning:button variant="brand" label="Add Debt" title="Brand action" onclick="{! c.AddDebt }" />
+                        
+                        <lightning:button variant="destructive" label="Remove Debt" title="Destructive action" onclick="{! c.RemoveDebt }"/>
+
+                        <br></br>
+                        <b>Total Row Count:&nbsp;</b> {!v.TotalRowCount}  &nbsp;  &nbsp;&nbsp;
+
+                        <b>Check Row Count:&nbsp;</b> {!v.CheckRowCount}  &nbsp;  &nbsp;&nbsp;
+                        <br></br><br></br>
+                        <div style="background-color:#00FFFF;">
+                        <b>Total Balance:&nbsp;</b>
+                        &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                        &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                        &nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                        $ {!v.totalBalance}  &nbsp;  &nbsp;&nbsp;
+                    </div>
+
+
+                        
+                    </lightning:card>
+                    
+
+
+
+</aura:component>
